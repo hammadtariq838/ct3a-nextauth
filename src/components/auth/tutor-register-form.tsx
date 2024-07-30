@@ -48,6 +48,9 @@ export const TutorRegisterForm = ({ group }: { group: 'ENROLLED' | 'GRADUATED' }
         .then((data) => {
           if (data.error) toast.error(data.error);
           if (data.success) toast.success(data.success);
+        })
+        .finally(() => {
+          form.reset();
         });
     });
   };
@@ -143,7 +146,7 @@ export const TutorRegisterForm = ({ group }: { group: 'ENROLLED' | 'GRADUATED' }
             <FormItem>
               <FormLabel className="w-full inline-flex justify-between">
                 <P>Password</P>
-                <Link href="/forgot-password"><P>Forgot Password</P></Link>
+                <Link href="/auth/reset"><P>Forgot Password</P></Link>
               </FormLabel>
               <FormControl>
                 <div className="relative">

@@ -79,7 +79,7 @@ export const LoginForm = () => {
             <FormItem>
               <FormLabel className="w-full inline-flex justify-between">
                 <P>Password</P>
-                <Link href="/forgot-password"><P>Forgot Password</P></Link>
+                <Link href="/auth/reset"><P>Forgot Password</P></Link>
               </FormLabel>
               <FormControl>
                 <Input type="password" {...field} />

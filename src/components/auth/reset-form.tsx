@@ -34,6 +34,9 @@ export const ResetForm = () => {
         .then((data) => {
           if (data.error) toast.error(data.error);
           if (data.success) toast.success(data.success);
+        })
+        .finally(() => {
+          form.reset();
         });
     });
   };
