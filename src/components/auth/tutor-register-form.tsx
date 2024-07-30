@@ -26,7 +26,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 
-export const TutorRegisterForm = ({ group }: { group: 'enrolled' | 'graduate' }) => {
+export const TutorRegisterForm = ({ group }: { group: 'ENROLLED' | 'GRADUATED' }) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isPending, startTransition] = useTransition();
 
@@ -36,7 +36,7 @@ export const TutorRegisterForm = ({ group }: { group: 'enrolled' | 'graduate' })
       name: "",
       email: "",
       password: "",
-      role: 'tutor',
+      role: 'TUTOR',
       group,
       termsAndConditions: 0,
     },
@@ -64,13 +64,17 @@ export const TutorRegisterForm = ({ group }: { group: 'enrolled' | 'graduate' })
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <RadioGroup {...field} className="flex flex-col gap-4" onValueChange={(value) => form.setValue('group', value)}>
+                <RadioGroup
+                  {...field}
+                  className="flex flex-col gap-4"
+                  onValueChange={(value: 'ENROLLED' | 'GRADUATED') => form.setValue('group', value)}
+                >
                   <div className="inline-flex gap-2">
-                    <RadioGroupItem value="enrolled" />
+                    <RadioGroupItem value="ENROLLED" />
                     <Label>Enrolled</Label>
                   </div>
                   <div className="inline-flex gap-2">
-                    <RadioGroupItem value="graduate" />
+                    <RadioGroupItem value="GRADUATED" />
                     <Label>Graduate</Label>
                   </div>
                 </RadioGroup>
@@ -189,6 +193,6 @@ export const TutorRegisterForm = ({ group }: { group: 'enrolled' | 'graduate' })
           Submit
         </Button>
       </form>
-    </Form>
+    </Form >
   );
 };

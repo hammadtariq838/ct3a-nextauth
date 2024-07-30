@@ -21,19 +21,19 @@ const RoleSelectionCards = async () => {
         <img src='/parent-svg.svg' alt='parent-role-selection-svg' />
         <H1>Parent</H1>
         <Muted className='text-center'>Sign up as a parent to provide your children with the top-tier tutoring they deserve.</Muted>
-        <RoleSelectionForm {...{ role: 'student', group: 'parent' }} />
+        <RoleSelectionForm {...{ role: 'STUDENT', group: 'PARENT' }} />
       </div>
       <div className='flex flex-col gap-4 bg-white rounded-lg p-6 text-wrap max-w-80 items-center'>
         <img src='/student-svg.svg' alt='student-role-selection-svg' />
         <H1>Student</H1>
         <Muted className='text-center'>Sign up as a student to chat with tutors, book lessons, and meet your tutor.</Muted>
-        <RoleSelectionForm {...{ role: 'student', group: 'student' }} />
+        <RoleSelectionForm {...{ role: 'STUDENT', group: 'SELF' }} />
       </div>
       <div className='flex flex-col gap-4 bg-white rounded-lg p-6 text-wrap max-w-80 items-center'>
         <img src='/tutor-svg.svg' alt='tutor-role-selection-svg' />
         <H1>Tutor</H1>
         <Muted className='text-center'>Sign up as a tutor to view booking requests and inspire new students.</Muted>
-        <RoleSelectionForm {...{ role: 'tutor', group: 'enrolled' }} />
+        <RoleSelectionForm {...{ role: 'TUTOR', group: 'ENROLLED' }} />
       </div>
     </React.Fragment>
   )
@@ -45,11 +45,11 @@ const SignUpCard = async ({ role, group }: Readonly<TUserRoleGroupCombination>) 
       <div className="flex items-center">
         <H2>Sign Up</H2>
         <H2>&nbsp;|&nbsp;</H2>
-        <P>{role === 'tutor' ? role.charAt(0).toUpperCase() + role.slice(1) : group.charAt(0).toUpperCase() + group.slice(1)}</P>
+        <P>{role === 'TUTOR' ? role.charAt(0).toUpperCase() + role.slice(1) : group.charAt(0).toUpperCase() + group.slice(1)}</P>
       </div>
       {
-        role === 'tutor' ? <TutorRegisterForm group={group} /> :
-          role === 'student' ? <StudentRegisterForm group={group} /> :
+        role === 'TUTOR' ? <TutorRegisterForm group={group} /> :
+          role === 'STUDENT' ? <StudentRegisterForm group={group} /> :
             redirect('/auth/login')
       }
     </div>

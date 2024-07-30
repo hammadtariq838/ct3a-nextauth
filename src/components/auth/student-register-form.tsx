@@ -22,7 +22,7 @@ import { P } from "@/components/Typography";
 import { Checkbox } from "../ui/checkbox";
 import Link from "next/link";
 
-export const StudentRegisterForm = ({ group }: { group: 'student' | 'parent' }) => {
+export const StudentRegisterForm = ({ group }: { group: 'SELF' | 'PARENT' }) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isPending, startTransition] = useTransition();
 
@@ -32,7 +32,7 @@ export const StudentRegisterForm = ({ group }: { group: 'student' | 'parent' }) 
       name: "",
       email: "",
       password: "",
-      role: "student",
+      role: "STUDENT",
       group,
       termsAndConditions: 0,
     },

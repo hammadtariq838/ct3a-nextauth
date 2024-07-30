@@ -1,3 +1,4 @@
+import { UserGroup, UserRole } from "@prisma/client";
 import * as z from "zod";
 
 export const NewPasswordSchema = z.object({
@@ -18,8 +19,8 @@ export const RegisterSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
   email: z.string().email({ message: "Email is required" }),
   password: z.string().min(8, { message: "Minimum 8 characters required" }),
-  role: z.string(),
-  group: z.string(),
+  role: z.nativeEnum(UserRole),
+  group: z.nativeEnum(UserGroup),
   termsAndConditions: z.number(),
 });
 
@@ -29,20 +30,18 @@ export const TutorRegisterSchema = RegisterSchema.extend({
 
 export const UserRoleGroupCombinationSchema = z.union([
   z.object({
-    role: z.literal("tutor"),
+    role: z.literal("TUTOR"),
     group: z
-      .union([z.literal("enrolled"), z.literal("graduate")])
-      .default("enrolled"),
+      .union([z.literal("ENROLLED"), z.literal("GRADUATED")])
+      .default("ENROLLED"),
   }),
   z.object({
-    role: z.literal("student"),
-    group: z
-      .union([z.literal("student"), z.literal("parent")])
-      .default("student"),
+    role: z.literal("STUDENT"),
+    group: z.union([z.literal("SELF"), z.literal("PARENT")]).default("SELF"),
   }),
   z.object({
-    role: z.literal("admin"),
-    group: z.literal("admin"),
+    role: z.literal("ADMIN"),
+    group: z.literal("ADMIN"),
   }),
 ]);
 
