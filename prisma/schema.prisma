@@ -8,8 +8,17 @@ generator client {
 }
 
 enum UserRole {
+    STUDENT
+    TUTOR
     ADMIN
-    USER
+}
+
+enum UserGroup {
+    ENROLLED
+    GRADUATED
+    SELF
+    PARENT
+    ADMIN
 }
 
 model User {
@@ -19,7 +28,8 @@ model User {
     emailVerified DateTime?
     image         String?
     password      String?
-    role          UserRole  @default(USER)
+    role          UserRole  @default(STUDENT)
+    group         UserGroup @default(SELF)
     accounts      Account[]
 }
 

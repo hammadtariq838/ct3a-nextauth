@@ -21,7 +21,6 @@ import { toast } from "sonner";
 
 export const ResetForm = () => {
   const [isPending, startTransition] = useTransition();
-
   const form = useForm<z.infer<typeof ResetSchema>>({
     resolver: zodResolver(ResetSchema),
     defaultValues: {
@@ -43,34 +42,32 @@ export const ResetForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6"
+        className='w-full flex flex-col gap-6'
       >
-        <div className="space-y-4">
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    disabled={isPending}
-                    placeholder="john.doe@example.com"
-                    type="email"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input
+                  {...field}
+                  disabled={isPending}
+                  placeholder="john.doe@example.com"
+                  type="email"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <Button
           disabled={isPending}
           type="submit"
           className="w-full"
         >
-          Send reset email
+          Send Reset Link
         </Button>
       </form>
     </Form>

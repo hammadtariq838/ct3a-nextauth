@@ -2,8 +2,7 @@
 
 import * as z from "zod";
 import { useForm } from "react-hook-form";
-import { useState, useTransition } from "react";
-import { useSearchParams } from "next/navigation";
+import { useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 
@@ -20,6 +19,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { login } from "@/actions/login";
 import { toast } from "sonner";
+
+import { P } from "@/components/Typography";
+import { Checkbox } from "../ui/checkbox";
+
 
 export const LoginForm = () => {
   const [isPending, startTransition] = useTransition();
@@ -54,64 +57,61 @@ export const LoginForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6"
+        className="w-full flex flex-col gap-8"
       >
-        <div className="space-y-4">
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    disabled={isPending}
-                    placeholder="john.doe@example.com"
-                    type="email"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    disabled={isPending}
-                    placeholder="******"
-                    type="password"
-                  />
-                </FormControl>
-                <Button
-                  size="sm"
-                  variant="link"
-                  asChild
-                  className="px-0 font-normal"
-                >
-                  <Link href="/auth/reset">
-                    Forgot password?
-                  </Link>
-                </Button>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder="shadcn" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="w-full inline-flex justify-between">
+                <P>Password</P>
+                <Link href="/forgot-password"><P>Forgot Password</P></Link>
+              </FormLabel>
+              <FormControl>
+                <Input type="password" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="rememberMe"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <div className="flex gap-2">
+                  <Checkbox {...field} onCheckedChange={(checked) => form.setValue('rememberMe', checked ? 1 : 0)} />
+                  <FormLabel>
+                    Remember Me
+                  </FormLabel>
+                </div>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <Button
           disabled={isPending}
           type="submit"
-          className="w-full"
         >
           Login
         </Button>
       </form>
-    </Form>
+    </Form >
   );
 };
